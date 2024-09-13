@@ -1,8 +1,18 @@
-export default function ProductDetail() {
+"use client"
+
+import { ProductDetailWrapper } from "@/app/components/ProductDetailWrapper";
+import { useMyContext } from "@/app/context";
+
+export default function ProductDetail({ params }) {
+    const { id } = params
+    const { Products } = useMyContext()
+    const clickedProduct = Products.find(product => product.id == id)
+    console.log(clickedProduct);
+
 
     return (
         <>
-            burası ürün detay sayfası
+            <ProductDetailWrapper clickedProduct={clickedProduct} />
 
         </>
     )

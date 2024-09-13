@@ -7,14 +7,8 @@ export const Header = () => {
     console.log(Products);
 
     return (
-        <header>
+        <div>
             <h1>Burası Header</h1>
-            {Products.map(advert => (
-                <div key={advert.id}>
-                    <h2>{advert.title}</h2>
-                    <p>{advert.description}</p>
-                </div>
-            ))}
-        </header>
+        </div>
     );
 };
