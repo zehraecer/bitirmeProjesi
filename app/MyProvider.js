@@ -2,15 +2,23 @@ import { supabase } from "@/utils/supabaseClient";
 import { MyProvider as Provider } from "./context";
 
 export async function MyProvider({ children }) {
-    const { data: Products, error } = await supabase.from('Products').select('*');
+    const { data: Products, error: ProductError } = await supabase.from('Products').select('*');
 
-    if (error) {
-        console.error('Error fetching products:', error);
-        return <div>Error fetching adverts</div>;
+    if (ProductError) {
+        console.log('Error fetching products:', ProductError);
+        return <div>Error fetching Products</div>;
     }
 
+
+    const { data: Products_category, error: Products_categoryError } = await supabase.from('Products_category').select('*')
+    if (Products_categoryError) {
+        console.log(Products_categoryError);
+        return <div>Error fetching Products_category</div>;
+    }
+
+
     return (
-        <Provider value={{ Products }}>
+        <Provider value={{ Products, Products_category }}>
             {children}
         </Provider>
     );
