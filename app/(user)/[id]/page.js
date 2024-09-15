@@ -2,18 +2,21 @@
 
 import { ProductDetailWrapper } from "@/app/components/ProductDetailWrapper";
 import { useMyContext } from "@/app/context";
+import { notFound } from "next/navigation";
 
 export default function ProductDetail({ params }) {
     const { id } = params
     const { Products } = useMyContext()
     const clickedProduct = Products.find(product => product.id == id)
-    console.log(clickedProduct);
+    if (clickedProduct) {
+        return (
+            <>
+                <ProductDetailWrapper clickedProduct={clickedProduct} />
+            </>
+        )
+    }
+    else {
+        return notFound()
+    }
 
-
-    return (
-        <>
-            <ProductDetailWrapper clickedProduct={clickedProduct} />
-
-        </>
-    )
 }
