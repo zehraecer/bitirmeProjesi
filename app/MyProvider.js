@@ -1,15 +1,14 @@
-import { supabase } from "@/utils/supabaseClient";
+import { createClient } from "@/utils/supabase/server";
 import { MyProvider as Provider } from "./context";
 
 export async function MyProvider({ children }) {
+    const supabase = createClient()
     const { data: Products, error: ProductError } = await supabase.from('Products').select('*');
 
     if (ProductError) {
         console.log('Error fetching products:', ProductError);
         return <div>Error fetching Products</div>;
     }
-
-
     const { data: Products_category, error: Products_categoryError } = await supabase.from('Products_category').select('*')
     if (Products_categoryError) {
         console.log(Products_categoryError);
