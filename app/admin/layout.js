@@ -6,7 +6,6 @@ export default function AdminLayout({ children }) {
         <>
             <div className="d-flex flex-column">
                 {children}
-                <AdminLogin />
             </div>
         </>
     )
