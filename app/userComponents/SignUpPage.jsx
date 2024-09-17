@@ -6,8 +6,9 @@ export const SignUpPage = () => {
         <>
             <span>Kayıt Ol</span>
             <form action={SignUpForm}>
-                <input type="email" name="email" id="" />
-                <input type="password" name="password" id="" />
+                <input type="text" name="name" placeholder="adınızı giriniz" />
+                <input type="email" name="email" placeholder="e-posta giriniz" />
+                <input type="password" name="password" placeholder="şifre giriniz" />
                 <button type="submit">gönder</button>
             </form>
         </>

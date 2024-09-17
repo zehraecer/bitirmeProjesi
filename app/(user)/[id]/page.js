@@ -1,6 +1,6 @@
 "use client"
 
-import { ProductDetailWrapper } from "@/app/components/ProductDetailWrapper";
+import { ProductDetailWrapper } from "@/app/userComponents/ProductDetailWrapper";
 import { useMyContext } from "@/app/context";
 import { notFound } from "next/navigation";
 
