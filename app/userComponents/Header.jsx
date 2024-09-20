@@ -8,26 +8,43 @@ export const Header = () => {
     const [isLogin, setIsLogin] = useState(false)
     const [registedUser, setRegistedUser] = useState(null)
     const [userLogOut, setUserLogOut] = useState(false)
+    const [adminEmail, setAdminEmail] = useState(null)
     const supabase = createClient()
 
     useEffect(() => {
         const checkSession = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             if (session) {
+                console.log(session);
+
                 setRegistedUser(session.user.user_metadata.name)
+                setAdminEmail(session.user.email)
                 setIsLogin(true);
             }
         };
         checkSession();
     }, []);
 
+    console.log(adminEmail);
 
     // if (registedUser) {
     //     console.log(registedUser);
     //     console.log(registedUser);  //ilkte undefined olarak geldği için sorgu gerekti
     // }
+    console.log(registedUser);
 
     useEffect(() => {
+        const OutAdmin = async () => {
+
+            if (adminEmail === "zehra@gmail.com") {
+                const { error } = await supabase.auth.signOut();
+                if (!error) {
+                    console.log("çıkış yapıldı");
+                    setIsLogin(false);
+                    // setUserLogOut(false);
+                }
+            }
+        }
         const logOut = async () => {
             if (userLogOut) {
                 const { error } = await supabase.auth.signOut();
@@ -39,7 +56,8 @@ export const Header = () => {
             }
         }
         logOut()
-    }, [userLogOut])
+        OutAdmin()
+    }, [userLogOut, adminEmail])
 
     return (
         <div>
