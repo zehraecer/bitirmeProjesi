@@ -25,23 +25,18 @@ export const Header = () => {
         checkSession();
     }, []);
 
-    console.log(adminEmail);
 
     // if (registedUser) {
     //     console.log(registedUser);
     //     console.log(registedUser);  //ilkte undefined olarak geldği için sorgu gerekti
     // }
-    console.log(registedUser);
-
     useEffect(() => {
         const OutAdmin = async () => {
 
             if (adminEmail === "zehra@gmail.com") {
                 const { error } = await supabase.auth.signOut();
                 if (!error) {
-                    console.log("çıkış yapıldı");
                     setIsLogin(false);
-                    // setUserLogOut(false);
                 }
             }
         }
