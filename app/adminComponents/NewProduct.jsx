@@ -4,9 +4,6 @@ import { useMyContext } from "../context";
 
 export const NewProduct = ({ AddProduct, newProductRef }) => {
     const { Products_category, Products_Color } = useMyContext()
-
-    console.log(AddProduct);
-
     return (
         <>
             <form ref={newProductRef} >
@@ -22,7 +19,7 @@ export const NewProduct = ({ AddProduct, newProductRef }) => {
                 <input type="number" name="price" placeholder="fiyat giriniz" />
                 <input type="number" placeholder="indirim oranı" name="discount" />
                 <input type="number" placeholder="stok giriniz" name="stock" />
-                <select name="color" placeholder>
+                <select name="color">
                     <option disabled value="renk seçiniz">renk seçiniz</option>
                     {Products_Color.map(color => (
                         <option key={color.id} value={color.id}>{color.name}</option>
