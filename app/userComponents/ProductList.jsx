@@ -4,7 +4,6 @@ import Link from "next/link"
 
 export const ProductList = () => {
     const { Products, Products_category, Products_Color } = useMyContext()
-    console.log(Products_category);
     return (
         <>
             <h1>burası ürünler sayfası</h1>

@@ -15,8 +15,6 @@ export const Header = () => {
         const checkSession = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             if (session) {
-                console.log(session);
-
                 setRegistedUser(session.user.user_metadata.name)
                 setAdminEmail(session.user.email)
                 setIsLogin(true);

@@ -4,6 +4,7 @@ import { useMyContext } from "../context";
 
 export const NewProduct = ({ AddProduct, newProductRef }) => {
     const { Products_category, Products_Color } = useMyContext()
+
     return (
         <>
             <form ref={newProductRef} >
