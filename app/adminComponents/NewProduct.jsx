@@ -2,12 +2,12 @@
 
 import { useMyContext } from "../context";
 
-export const NewProduct = ({ AddProduct, newProductRef }) => {
+export const NewProduct = ({ AddProduct }) => {
     const { Products_category, Products_Color } = useMyContext()
 
     return (
         <>
-            <form ref={newProductRef} >
+            <form  >
                 <input type="text" name="description" placeholder="tanım giriniz" />
                 <select name="category" placeholder>
                     <option disabled value="kategori seçiniz">kategori seçiniz</option>

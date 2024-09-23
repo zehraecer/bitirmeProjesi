@@ -1,14 +1,11 @@
-"use server"
-
+"use client"
 import { ProductDetailWrapper } from "@/app/userComponents/ProductDetailWrapper";
-// import { useMyContext } from "@/app/context";
 import { notFound } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
+import { useMyContext } from "@/app/context";
 
-export default async function ProductDetail({ params }) {
+export default function ProductDetail({ params }) {
     const { id } = params
-    const supabase = createClient()
-    const { data: Products, error: ProductError } = await supabase.from('Products').select('*');
+    const { Products } = useMyContext()
     const clickedProduct = Products.find(product => product.id == id)
     if (clickedProduct) {
         return (

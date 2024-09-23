@@ -3,7 +3,6 @@ import { AdminLoginForm } from "@/actions/AdminLogin"
 export const AdminLogin = () => {
 
     return (
-
         <>
             <form action={AdminLoginForm}>
                 <input type="email" name="email" placeholder="e-posta giriniz" />

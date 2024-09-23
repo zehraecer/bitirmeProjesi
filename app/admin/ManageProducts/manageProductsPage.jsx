@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useMyContext } from "@/app/context";
 import { NewProduct } from "@/app/adminComponents/NewProduct";
 import { createClient } from "@/utils/supabase/client";
@@ -6,30 +5,23 @@ import { createClient } from "@/utils/supabase/client";
 export const ManageProductsPage = () => {
     const { Products, Products_category, Products_Color } = useMyContext()
     const supabase = createClient()
-    const newProductRef = useRef()
 
-    let c = Products
     const AddProduct = async (e) => {
         e.preventDefault()
 
-        const formData = new FormData(newProductRef.current)
+        const formData = new FormData(e.target)
         const formObj = Object.fromEntries(formData.entries());
         const { data: dataImg, error: imgError } = await supabase.storage.from('Products_images').upload(`uploads/${Date.now()}_${formObj.file.name}`, formObj.file);
-
         const filePath = dataImg.path;
-        const { data: publicUrlData } = supabase
-            .storage
-            .from('Products_images')
-            .getPublicUrl(filePath);
-
+        const { data: publicUrlData } = supabase.storage.from('Products_images').getPublicUrl(filePath);
         const imageUrl = publicUrlData.publicUrl;
 
         if (imgError) {
-            console.error("Resim yükleme hatası:", imgError);
+            console.error("Resim yükleme hatası", imgError);
             return;
         }
 
-        const deneme = {
+        const newProductDetail = {
             description: formObj.description,
             category: formObj.category,
             price: formObj.price,
@@ -38,21 +30,20 @@ export const ManageProductsPage = () => {
             stock: formObj.stock,
             product_color: formObj.color
         }
-        const { data, error } = await supabase.from('Products').insert([deneme]).select()
+
+        const { data, error } = await supabase.from('Products').insert([newProductDetail]).select()
+
         if (error) {
-            console.error("Ürün ekleme hatası:", error);
+            console.error("error", error);
         } else {
-            console.log("Ürün başarıyla eklendi:", data);
+            console.log(data);
         }
     }
 
-    // useEffect(() => {
-    //  AddProduct()
-    // }, [])
     return (
         <>
-            <NewProduct newProductRef={newProductRef} AddProduct={AddProduct} />
-            {c.map(product => (
+            <NewProduct AddProduct={AddProduct} />
+            {Products.map(product => (
                 <div key={product.id}>
                     <img style={{ width: "50px", height: "50px" }} src={product.product_img} />
                     <span>{product.description}-----</span>
@@ -71,7 +62,6 @@ export const ManageProductsPage = () => {
                             return <span key={index} style={{ color: "blue" }}>{color.name}-----</span>
                         }
                     })}
-
                 </div>
             ))}
         </>
