@@ -1,43 +1,60 @@
 import { useMyContext } from "@/app/context";
 import { NewProduct } from "@/app/adminComponents/NewProduct";
-import { createClient } from "@/utils/supabase/client";
+import { useEffect } from "react";
 
 export const ManageProductsPage = () => {
     const { Products, Products_category, Products_Color } = useMyContext()
-    const supabase = createClient()
+
+    useEffect(() => {
+
+    }, [Products])
 
     const AddProduct = async (e) => {
         e.preventDefault()
-
         const formData = new FormData(e.target)
         const formObj = Object.fromEntries(formData.entries());
-        const { data: dataImg, error: imgError } = await supabase.storage.from('Products_images').upload(`uploads/${Date.now()}_${formObj.file.name}`, formObj.file);
-        const filePath = dataImg.path;
-        const { data: publicUrlData } = supabase.storage.from('Products_images').getPublicUrl(filePath);
-        const imageUrl = publicUrlData.publicUrl;
 
-        if (imgError) {
-            console.error("Resim yükleme hatası", imgError);
-            return;
+        try {
+
+            const photoResponse = await fetch('/api/getPhoto', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!photoResponse.ok) {
+                const photoData = await photoResponse.json();
+                console.error(photoData);
+                throw new Error("resim yükleme hatsı ");
+            }
+
+            const { imageUrl } = await photoResponse.json();
+            const response = await fetch('/api/adminAddProduct', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    description: formObj.description,
+                    category: formObj.category,
+                    price: formObj.price,
+                    discount_rate: formObj.discount,
+                    product_img: imageUrl,
+                    stock: formObj.stock,
+                    product_color: formObj.color
+                })
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                console.log(data);
+                throw new Error('hata');
+
+            }
+
+
+        } catch (error) {
+            console.log(error.message);
+
         }
 
-        const newProductDetail = {
-            description: formObj.description,
-            category: formObj.category,
-            price: formObj.price,
-            discount_rate: formObj.discount,
-            product_img: imageUrl,
-            stock: formObj.stock,
-            product_color: formObj.color
-        }
-
-        const { data, error } = await supabase.from('Products').insert([newProductDetail]).select()
-
-        if (error) {
-            console.error("error", error);
-        } else {
-            console.log(data);
-        }
     }
 
     return (

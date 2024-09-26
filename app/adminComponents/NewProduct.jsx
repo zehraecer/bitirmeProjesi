@@ -7,7 +7,7 @@ export const NewProduct = ({ AddProduct }) => {
 
     return (
         <>
-            <form  >
+            <form onSubmit={AddProduct} >
                 <input type="text" name="description" placeholder="tanım giriniz" />
                 <select name="category" placeholder>
                     <option disabled value="kategori seçiniz">kategori seçiniz</option>
@@ -28,7 +28,7 @@ export const NewProduct = ({ AddProduct }) => {
                 </select>
                 <label for="myfile">resim ekleyiniz</label>
                 <input type="file" name="file" /><br />
-                <button onClick={AddProduct} type="submit" >ürün ekle</button>
+                <button type="submit" >ürün ekle</button>
             </form>
         </>
     )
