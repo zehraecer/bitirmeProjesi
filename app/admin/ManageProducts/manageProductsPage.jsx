@@ -48,13 +48,10 @@ export const ManageProductsPage = () => {
                 throw new Error('hata');
 
             }
-
-
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
 
         }
-
     }
 
     return (

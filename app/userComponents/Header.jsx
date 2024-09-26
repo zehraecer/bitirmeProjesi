@@ -1,64 +1,67 @@
 "use client";
 
-import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
     const [isLogin, setIsLogin] = useState(false)
     const [registedUser, setRegistedUser] = useState(null)
-    const [userLogOut, setUserLogOut] = useState(false)
+    // const [userLogOut, setUserLogOut] = useState(false)
     const [adminEmail, setAdminEmail] = useState(null)
-    const supabase = createClient()
 
     useEffect(() => {
         const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                setRegistedUser(session.user.user_metadata.name)
-                setAdminEmail(session.user.email)
-                setIsLogin(true);
+            try {
+                const response = await fetch('/api/checkSession');
+                const data = await response.json();
+
+                if (response.ok) {
+                    const { session } = data;
+                    console.log(session);
+                    setRegistedUser(session.user.user_metadata.name);
+                    setAdminEmail(session.user.email);
+                    setIsLogin(true);
+                } else {
+                    console.error(data.error);
+                }
+            } catch (error) {
+                console.error("Oturum kontrol hatası: ", error);
             }
         };
+
         checkSession();
     }, []);
 
+    const HandleLogOut = async () => {
+        setIsLogin(!isLogin)
+        try {
+            const response = await fetch('/api/logout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            });
 
-    // if (registedUser) {
-    //     console.log(registedUser);
-    //     console.log(registedUser);  //ilkte undefined olarak geldği için sorgu gerekti
-    // }
+            if (!response.ok) {
+                throw new Error('Çıkış yapma hatası');
+            }
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error(error.message);
+        } finally {
+            setIsLogin(!isLogin);
+        }
+    }
+
     useEffect(() => {
-        const OutAdmin = async () => {
 
-            if (adminEmail === "zehra@gmail.com") {
-                const { error } = await supabase.auth.signOut();
-                if (!error) {
-                    setIsLogin(false);
-                }
-            }
-        }
-        const logOut = async () => {
-            if (userLogOut) {
-                const { error } = await supabase.auth.signOut();
-                if (!error) {
-                    console.log("çıkış yapıldı");
-                    setIsLogin(false);
-                    // setUserLogOut(false);
-                }
-            }
-        }
-        logOut()
-        OutAdmin()
-    }, [userLogOut, adminEmail])
-
+    }, [isLogin])
     return (
         <div>
             <span>Burası Header</span>
             {!isLogin ? <div>
                 <Link href="LogIn"> Giriş Yap</Link>
                 <Link href="SignUp">Kayıt ol</Link>
-            </div> : <span>hoşgeldiniz {registedUser} <span onClick={() => setUserLogOut(true)}>çıkış yap</span></span>}
+            </div> : <span>hoşgeldiniz {registedUser} <span onClick={HandleLogOut}>çıkış yap</span></span>}
         </div>
     );
 };

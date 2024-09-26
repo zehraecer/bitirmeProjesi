@@ -7,7 +7,6 @@ export async function POST(request) {
     const { description, category, price, stock, product_color, product_img } = await request.json();
 
     try {
-        // Ürünü veritabanına ekleme
         const { data, error } = await supabase
             .from('Products')
             .insert([{ description, category, price, stock, product_color, product_img }])

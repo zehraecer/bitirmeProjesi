@@ -1,19 +1,19 @@
-'use client'; // Burası artık client-side olacak
+'use client';
 import React, { useState } from 'react';
 
 
 export const ProductDetailWrapper = ({ clickedProduct }) => {
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
+    // const [message, setMessage] = useState("");
     const AddToCart = async () => {
         console.log("oldu");
-
         setLoading(true);
         try {
             const response = await fetch('/api/addToCart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    user: "zeynep",
                     id: clickedProduct.id,
                     title: clickedProduct.description,
                     price: clickedProduct.price,
@@ -28,11 +28,10 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
             }
 
             const data = await response.json();
-            setMessage("ürün sepete eklendi");
             console.log(data);
 
         } catch (error) {
-            setMessage(error.message);
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -43,7 +42,6 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
             <span>{clickedProduct.description}</span>
             <img style={{ width: "100px", height: "100px" }} src={clickedProduct.product_img} />
             <span>{clickedProduct.price}₺</span>
-
             <button className="btn" onClick={() => AddToCart(clickedProduct.id)} >Sepete ekle</button>
         </>
     )
