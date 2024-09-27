@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CheckSessionData, LogOutUser } from "./checkSessionData";
 
 export const Header = () => {
     const [isLogin, setIsLogin] = useState(false)
@@ -9,47 +10,21 @@ export const Header = () => {
     // const [userLogOut, setUserLogOut] = useState(false)
     const [adminEmail, setAdminEmail] = useState(null)
 
+
     useEffect(() => {
         const checkSession = async () => {
-            try {
-                const response = await fetch('/api/checkSession');
-                const data = await response.json();
-
-                if (response.ok) {
-                    const { session } = data;
-                    console.log(session);
-                    setRegistedUser(session.user.user_metadata.name);
-                    setAdminEmail(session.user.email);
-                    setIsLogin(true);
-                } else {
-                    console.error(data.error);
-                }
-            } catch (error) {
-                console.error("Oturum kontrol hatası: ", error);
-            }
+            await CheckSessionData(setRegistedUser, setAdminEmail, setIsLogin)
         };
 
         checkSession();
     }, []);
 
+    console.log(isLogin, registedUser, adminEmail);
+
+
     const HandleLogOut = async () => {
         setIsLogin(!isLogin)
-        try {
-            const response = await fetch('/api/logout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            if (!response.ok) {
-                throw new Error('Çıkış yapma hatası');
-            }
-            const data = await response.json();
-            console.log(data.message);
-        } catch (error) {
-            console.error(error.message);
-        } finally {
-            setIsLogin(!isLogin);
-        }
+        await LogOutUser(setIsLogin, isLogin)
     }
 
     useEffect(() => {

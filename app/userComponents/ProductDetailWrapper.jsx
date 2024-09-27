@@ -6,14 +6,13 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
     const [loading, setLoading] = useState(false);
     // const [message, setMessage] = useState("");
     const AddToCart = async () => {
-        console.log("oldu");
         setLoading(true);
         try {
             const response = await fetch('/api/addToCart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    user: "zeynep",
+                    user_eposta: 1,
                     id: clickedProduct.id,
                     title: clickedProduct.description,
                     price: clickedProduct.price,

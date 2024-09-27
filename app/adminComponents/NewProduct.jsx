@@ -1,13 +1,14 @@
 "use client"
 
+import { NewProductForm } from "../admin/NewProductAction";
 import { useMyContext } from "../context";
 
-export const NewProduct = ({ AddProduct }) => {
+export const NewProduct = () => {
     const { Products_category, Products_Color } = useMyContext()
 
     return (
         <>
-            <form onSubmit={AddProduct} >
+            <form action={NewProductForm} >
                 <input type="text" name="description" placeholder="tanım giriniz" />
                 <select name="category" placeholder>
                     <option disabled value="kategori seçiniz">kategori seçiniz</option>
