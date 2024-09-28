@@ -4,18 +4,24 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CheckSessionData, LogOutUser } from "./checkSessionData";
 
+
 export const Header = () => {
+
     const [isLogin, setIsLogin] = useState(false)
     const [registedUser, setRegistedUser] = useState(null)
     // const [userLogOut, setUserLogOut] = useState(false)
     const [adminEmail, setAdminEmail] = useState(null)
 
-
     useEffect(() => {
         const checkSession = async () => {
-            await CheckSessionData(setRegistedUser, setAdminEmail, setIsLogin)
-        };
+            const session = await CheckSessionData()
+            if (session) {
+                setRegistedUser(session.user.user_metadata.name);
+                setAdminEmail(session.user.email);
+                setIsLogin(true);
+            }
 
+        };
         checkSession();
     }, []);
 

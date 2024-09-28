@@ -1,40 +1,21 @@
 'use client';
 import React, { useState } from 'react';
+import { AddToCartFunction, ProductBasket } from './checkSessionData';
+import { useMyContext } from "../context";
 
 
 export const ProductDetailWrapper = ({ clickedProduct }) => {
     const [loading, setLoading] = useState(false);
+    const { Products_basket } = useMyContext()
     // const [message, setMessage] = useState("");
+
+    console.log(Products_basket);
     const AddToCart = async () => {
         setLoading(true);
-        try {
-            const response = await fetch('/api/addToCart', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_eposta: 1,
-                    id: clickedProduct.id,
-                    title: clickedProduct.description,
-                    price: clickedProduct.price,
-                    previous_price: "155",
-                    img: clickedProduct.product_img,
-                    stock: clickedProduct.stock
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('hata');
-            }
-
-            const data = await response.json();
-            console.log(data);
-
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
+        AddToCartFunction(clickedProduct)
     };
+
+
 
     return (
         <>

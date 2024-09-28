@@ -21,8 +21,13 @@ export async function MyProvider({ children }) {
         console.log(colorError);
         return <div>Error fetching colorError</div>;
     }
+    const { data: Products_basket, error: BasketError } = await supabase.from('Products_basket').select('*')
+    if (BasketError) {
+        console.log(error);
+    }
+
     return (
-        <Provider value={{ Products, Products_category, Products_Color }}>
+        <Provider value={{ Products, Products_category, Products_Color, Products_basket }}>
             {children}
         </Provider>
     );
