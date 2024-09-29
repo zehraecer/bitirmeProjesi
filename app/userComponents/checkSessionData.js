@@ -33,20 +33,20 @@ export const LogOutUser = async (one, two) => {
     }
 }
 
-export const AddToCartFunction = async (product) => {
+export const AddToCartFunction = async (product, name, eposta, piece) => {
 
     try {
         const response = await fetch('/api/addToCart', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                user_eposta: 1,
-                id: product.id,
+                user_name: name,
+                user_eposta: eposta,
                 title: product.description,
-                price: product.price,
-                previous_price: "155",
+                price: product.price * piece,
+                previous_price: product.price,
                 img: product.product_img,
-                stock: product.stock
+                stock: piece
             })
         });
 
@@ -55,12 +55,32 @@ export const AddToCartFunction = async (product) => {
         }
 
         const data = await response.json();
-        console.log(data);
 
     } catch (error) {
         console.log(error);
     }
 }
+
+
+export const DeleteBtn = async (id) => {
+    try {
+        const response = await fetch('/api/deleteProduct', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+        });
+
+        if (!response.ok) {
+            throw new Error('Ürün silinirken bir hata oluştu.');
+        }
+
+        const data = await response.json();
+        console.log('Ürün başarıyla silindi:', data);
+    } catch (error) {
+        console.error('Silme işlemi başarısız:', error);
+    }
+};
+
 
 
 // export const ProductBasket = async () => {
