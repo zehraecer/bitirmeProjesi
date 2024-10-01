@@ -9,9 +9,6 @@ export async function NewProductForm(formData) {
     const { data: { session }, error } = await supabase.auth.getSession()
 
     const sessionEposta = session.user.email
-
-
-
     try {
         const photoResponse = await fetch('http://localhost:3000/api/getPhoto', {
             method: 'POST',

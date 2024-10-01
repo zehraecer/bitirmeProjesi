@@ -9,9 +9,10 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
     const { Products_basket } = useMyContext()
     // const [basket, setBasket] = useState(Products_basket)
     const [ahsen, setahsen] = useState(false)
-    let piece = 2
-    // let y = true
+    const localPiece = localStorage.getItem('piece') || 0;
+    const [piece, setPiece] = useState(localPiece)
 
+    // let y = true
     useEffect(() => {
         const AddToCart = async () => {
             if (ahsen) {
@@ -21,7 +22,9 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                     if (isProductTheCart.length < 1) {
                         const name = session.user.user_metadata.name
                         const eposta = session.user.email
-                        AddToCartFunction(clickedProduct, name, eposta, piece)
+                        const piece = localStorage.getItem('piece') || 0;
+                        localStorage.setItem('piece', piece);
+                        AddToCartFunction(clickedProduct, name, eposta)
                     } else {
                         console.log("ssepette ürün var");
                     }
@@ -29,7 +32,7 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                     console.log("lütfen giriş yap");
                 }
             } else {
-                setahsen(false)
+                setahsen(!ahsen)
             }
         };
         AddToCart()
@@ -39,12 +42,32 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
 
     }, [clickedProduct, clickedProduct.description])
 
+    const IncreaseProduct = () => {
+        setPiece(piece => piece + 1)
+    }
+
+    const ReduceProduct = () => {
+        if (piece > 0) {
+            setPiece(piece => piece - 1)
+        }
+    }
+
+    useEffect(() => {
+
+    }, [piece])
+
+    console.log(piece);
+
     return (
         <>
             <span>{clickedProduct.description}</span>
             <img style={{ width: "100px", height: "100px" }} src={clickedProduct.product_img} />
             <span>{clickedProduct.price}₺</span>
-            <span>{piece}</span>
+            <span>
+                <span style={{ padding: "15px", backgroundColor: 'lightcoral', cursor: "pointer" }} onClick={ReduceProduct}>-</span>
+                <span style={{ padding: "15px", backgroundColor: 'lightblue' }}>{piece}</span>
+                <span style={{ padding: "15px", backgroundColor: 'lightcoral', cursor: "pointer" }} onClick={IncreaseProduct}>+</span>
+            </span>
             <button className="btn" onClick={() => setahsen(true)} >Sepete ekle</button>
         </>
     )
