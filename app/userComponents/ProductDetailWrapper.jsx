@@ -6,16 +6,15 @@ import { useMyContext } from "../context";
 
 
 export const ProductDetailWrapper = ({ clickedProduct }) => {
-    const { Products_basket } = useMyContext()
+    const { Products_basket, Products_category, Products_Color } = useMyContext()
     // const [basket, setBasket] = useState(Products_basket)
-    const [ahsen, setahsen] = useState(false)
+    const [basketBtn, setBasketBtn] = useState(false)
     const localPiece = localStorage.getItem('piece') || 0;
     const [piece, setPiece] = useState(localPiece)
-
     // let y = true
     useEffect(() => {
         const AddToCart = async () => {
-            if (ahsen) {
+            if (basketBtn) {
                 const isProductTheCart = Products_basket.filter(basket => basket.title === clickedProduct.description)
                 const session = await CheckSessionData()
                 if (session) {
@@ -32,11 +31,11 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                     console.log("lütfen giriş yap");
                 }
             } else {
-                setahsen(!ahsen)
+                setBasketBtn(!basketBtn)
             }
         };
         AddToCart()
-    }, [ahsen, Products_basket])
+    }, [basketBtn, Products_basket])
 
     useEffect(() => {
 
@@ -56,11 +55,10 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
 
     }, [piece])
 
-    console.log(piece);
 
     return (
         <>
-            <span>{clickedProduct.description}</span>
+            {/* <span>{clickedProduct.description}</span>
             <img style={{ width: "100px", height: "100px" }} src={clickedProduct.product_img} />
             <span>{clickedProduct.price}₺</span>
             <span>
@@ -68,7 +66,39 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                 <span style={{ padding: "15px", backgroundColor: 'lightblue' }}>{piece}</span>
                 <span style={{ padding: "15px", backgroundColor: 'lightcoral', cursor: "pointer" }} onClick={IncreaseProduct}>+</span>
             </span>
-            <button className="btn" onClick={() => setahsen(true)} >Sepete ekle</button>
+            <button className="btn" onClick={() => setahsen(true)} >Sepete ekle</button> */}
+
+            <div className='d-flex justify-content-center align-items-start  product-detail '>
+
+                <div className='p-detail-left zoom-effect'>
+                    <img src={clickedProduct.product_img} alt="" />
+                </div>
+
+                <div className='p-detail-right '>
+                    <div className='p-detail-one w-100'>
+                        <span>{clickedProduct.description}</span>
+                        {Products_Color.map((color, index) => {
+                            const isColor = color.id == clickedProduct.product_color
+                            if (isColor) {
+                                return <p key={index}>({color.name})</p>
+                            }
+                        })}
+                    </div>
+                    <div className='d-flex gap-10 p-detail-two '>
+                        <div className='p-detail-two-span'>
+                            <span>₺{clickedProduct.price}</span>
+                        </div>
+                        <div className='p-detail-two-p'>
+                            <p>%{clickedProduct.discount_rate}indirim</p>
+                        </div>
+                    </div>
+
+                    <div className='addBasketBtn'>
+                        <span onClick={() => setBasketBtn(true)}  >Sepete Ekle</span>
+                    </div>
+                </div>
+
+            </div>
         </>
     )
 }

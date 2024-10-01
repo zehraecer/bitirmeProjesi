@@ -45,8 +45,10 @@ li {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  padding-inline: 10px;
 
   span {
+    font-size: 13px;
     text-align: left;
     color: #1D2026;
     font-weight: 700;
@@ -70,6 +72,8 @@ li {
   justify-content: space-between;
   margin-top: 15px;
   margin-bottom: 15px;
+  padding-inline: 10px;
+
 
   span {
     color: rgb(243, 95, 50);
@@ -94,6 +98,10 @@ li {
     object-fit: cover;
   }
 
+}
+
+.discountDiv {
+  padding-inline: 10px;
 }
 
 .discountSpan {
@@ -140,4 +148,128 @@ li {
 
 .deneme {
   text-transform: capitalize !important;
+}
+
+
+/* Product Detail */
+
+.product-detail {
+  margin-top: 20px;
+  gap: 60px;
+}
+
+.p-detail-left {
+
+  border-radius: 15px !important;
+  overflow: hidden;
+
+  img {
+    height: 500px;
+    width: 430px;
+    object-fit: cover;
+  }
+}
+
+.zoom-effect {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.zoom-effect img {
+  transition: transform 0.5s ease;
+}
+
+.zoom-effect:hover img {
+  transform: scale(1.7);
+}
+
+.p-detail-right {
+  margin-top: 20px;
+}
+
+.p-detail-one {
+  margin-top: 16px;
+  border-radius: 8px;
+
+  span {
+    padding: 15px 164px 15px 5px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #393e47;
+
+  }
+
+  p {
+    /* margin-top: 24px; */
+    padding: 5px 164px 15px 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #eb6c27;
+  }
+}
+
+.p-detail-two {
+  margin-top: 20px;
+}
+
+.p-detail-two-span {
+  padding: 22px 24px;
+  background-color: rgb(247, 232, 206);
+  border-radius: 8px;
+
+  span {
+    font-size: 28px;
+    font-weight: 900;
+    color: #eb6c27;
+
+  }
+}
+
+.p-detail-two-p {
+  padding: 22px 24px;
+  background: linear-gradient(90deg, rgba(253, 29, 29, 0.847) 15%, rgba(252, 233, 69, 0.875) 100%);
+  border-radius: 5px;
+  border-top-right-radius: 70px;
+  border-bottom-left-radius: 70px;
+  animation: animation-one 2s ease infinite;
+  background-size: 200% 200%;
+
+  p {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+}
+
+@keyframes animation-one {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.addBasketBtn {
+  margin-top: 130px;
+  padding: 15px 8px;
+  background-color: #dc713f;
+  text-align: center;
+  border-radius: 15px;
+
+  span {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+  }
+}
+
+.gap-10 {
+
+  gap: 60px;
 }
