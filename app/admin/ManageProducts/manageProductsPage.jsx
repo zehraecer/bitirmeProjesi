@@ -1,13 +1,18 @@
-// "use client"
+"use client"
 import { useMyContext } from "@/app/context";
 
 import { NewProduct } from "@/app/adminComponents/NewProduct";
+import { useEffect } from "react";
 
 export const ManageProductsPage = () => {
     const { Products, Products_category, Products_Color } = useMyContext()
+
+    useEffect(() => {
+
+    }, [Products])
     return (
         <>
-            <NewProduct />
+            <NewProduct Products={Products} />
             {Products.map(product => (
                 <div key={product.id}>
                     <img style={{ width: "50px", height: "50px" }} src={product.product_img} />
