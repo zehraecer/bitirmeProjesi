@@ -68,7 +68,7 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
             </span>
             <button className="btn" onClick={() => setahsen(true)} >Sepete ekle</button> */}
 
-            <div className='d-flex justify-content-center align-items-start  product-detail '>
+            <div className='d-flex  flex-md-row flex-column justify-content-center align-items-start  product-detail '>
 
                 <div className='p-detail-left zoom-effect'>
                     <img src={clickedProduct.product_img} alt="" />

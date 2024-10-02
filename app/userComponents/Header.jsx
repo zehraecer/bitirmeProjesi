@@ -16,6 +16,7 @@ export const Header = () => {
     // const [userLogOut, setUserLogOut] = useState(false)
     const [adminEmail, setAdminEmail] = useState(null)
     const [deneme, setdeneme] = useState(Products_basket)
+    const [userLogo, setUserLogo] = useState("")
 
     useEffect(() => {
         const checkSession = async () => {
@@ -31,6 +32,15 @@ export const Header = () => {
     useEffect(() => {
 
     }, [deneme])
+    console.log(registedUser);
+
+    useEffect(() => {
+        if (registedUser && registedUser.length > 0) {
+            let logo = registedUser[0].substring(0, 1)
+            return setUserLogo(logo)
+        }
+
+    }, [registedUser])
 
     const HandleLogOut = async () => {
         setIsLogin(!isLogin)
@@ -56,11 +66,11 @@ export const Header = () => {
                 <div className='d-flex justify-content-between align-items-center' >
                     <h1>Parla</h1>
                     <ul className='d-flex gap-3'>
-                        <li>Tüm Ürünler</li>
-                        <li>Kolye</li>
-                        <li>Bileklik</li>
-                        <li>Küpe</li>
-                        <li>Yüzük</li>
+                        <Link href="/">Tüm Ürünler</Link>
+                        <Link href="/Kolye">Kolye</Link>
+                        <Link href="/Bileklik">Bileklik</Link>
+                        <Link href="/Kupe">Küpe</Link>
+                        <Link href="/Yuzuk">Yüzük</Link>
                     </ul>
                 </div>
                 <div className='d-flex justify-content-between align-items-center'>
@@ -73,7 +83,7 @@ export const Header = () => {
                         <span>hoşgeldiniz {registedUser} <span onClick={HandleLogOut}>çıkış yap</span></span>}
                 </div>
                 <div className='d-flex gap-3'>
-                    <span>Z</span>
+                    <span>{userLogo}</span>
                     <span>sepet</span>
                 </div>
             </div>

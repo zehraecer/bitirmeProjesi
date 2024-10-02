@@ -309,3 +309,138 @@ li {
     border-radius: 5px;
   }
 }
+
+/* manageProduct- NewProduct */
+
+.newProductFormWrapper {
+  margin-top: 25px;
+}
+
+.newProductForm {
+  display: flex;
+  gap: 13px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  input {
+    background-color: #f9f3ef;
+    padding: 5px 25px;
+    border: 2px solid #ba5d23;
+    border-radius: 3px;
+  }
+
+  input:focus {
+    outline: none;
+    background-color: #fff;
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #dc713f;
+
+  }
+}
+
+.newProductForm-two {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  button {
+    border: none;
+    padding: 10px 0px;
+    background-color: rgb(250, 238, 221);
+    border-radius: 8px;
+    color: #dc713f;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+}
+
+.newProductFormSelect {
+  width: 250px;
+  height: 38px;
+  background-color: #f9f3ef;
+  border: 2px solid #ba5d23;
+  border-radius: 3px;
+}
+
+.newProductFormSelect-Two {
+  width: 250px;
+  height: 38px;
+  background-color: #f9f3ef;
+  border: 2px solid #ba5d23;
+  border-radius: 3px;
+}
+
+.newProductFormDivTwo {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.newProductFormFile {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input {
+
+    border: none;
+  }
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 20px;
+  padding: 8px 12px;
+  background: #f35656;
+  color: white;
+  border: 1px solid #9a2d2d;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:active {
+
+  background-color: #d37777;
+}
+
+/* manageProducts */
+
+.manageProducts {
+  /* padding: 12px 15px !important; */
+  padding-left: 10px !important;
+  padding-right: 3px !important;
+  /* border: 1px solid pink; */
+  box-shadow: rgba(240, 240, 243, 0.25) 0px 50px 100px -20px, rgba(247, 123, 86, 0.3) 0px 30px 60px -30px, rgba(232, 107, 40, 0.35) 0px -2px 6px 0px inset;
+  ;
+  padding: 10px;
+}
+
+.manageProducts-img {
+
+  border: 2px solid rgb(243, 107, 107);
+  border-radius: 5px;
+
+}
+
+.manageProducts-img img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.manageProductsSpan-one {
+
+  font-size: 14px;
+  font-weight: 700;
+  color: #171717;
+  text-transform: capitalize;
+}

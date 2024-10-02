@@ -11,29 +11,42 @@ export const ManageProductsPage = () => {
 
     }, [Products])
     return (
-        <>
+        <div className="px-5  mt-2">
             <NewProduct Products={Products} />
-            {Products.map(product => (
-                <div key={product.id}>
-                    <img style={{ width: "50px", height: "50px" }} src={product.product_img} />
-                    <span>{product.description}-----</span>
-                    <span>{product.price}₺-----</span>
-                    {Products_category.map((pCategory, index) => {
-                        const isCategory = pCategory.id == product.category
-                        if (isCategory) {
-                            return <span style={{ color: "red" }} key={index}>{pCategory.name}-----</span>
-                        }
-                    }
-                    )}
-                    <span>{product.stock} -----</span>
-                    {Products_Color.map((color, index) => {
-                        const isColor = color.id == product.product_color
-                        if (isColor) {
-                            return <span key={index} style={{ color: "blue" }}>{color.name}-----</span>
-                        }
-                    })}
-                </div>
-            ))}
-        </>
+
+            <div className="row mt-5 align-items-center gap-5">
+                {Products.map(product => (
+                    <div key={product.id} className="d-flex  justify-content-center gap-3 align-items-center col  manageProducts">
+                        <div className="manageProducts-img ">
+                            <img className="" src={product.product_img} />
+                        </div>
+                        <div >
+                            <span className="manageProductsSpan-one">{product.description.toLowerCase()}</span>
+                            <div className="d-flex flex-column">
+                                <span className="manageProductsSpan-one">{product.price}₺</span>
+
+                                {Products_category.map((pCategory, index) => {
+                                    const isCategory = pCategory.id == product.category
+                                    if (isCategory) {
+                                        return <span className="manageProductsSpan-one" key={index}>Kategori:  {pCategory.name}</span>
+                                    }
+                                }
+                                )}
+                                <span className="manageProductsSpan-one">Stock: {product.stock} </span>
+                                <span className="manageProductsSpan-one">İndirim: {product.discount_rate}</span>
+                                {Products_Color.map((color, index) => {
+                                    const isColor = color.id == product.product_color
+                                    if (isColor) {
+                                        return <span key={index} className="manageProductsSpan-one">Renk: {color.name}</span>
+                                    }
+                                })}
+                            </div>
+                        </div>
+
+                    </div>
+                ))}
+            </div>
+
+        </div>
     )
 }
