@@ -19,7 +19,7 @@ export const ManageProductsPage = () => {
                 {Products.map(product => (
                     <div key={product.id} className="d-flex  justify-content-center gap-3 align-items-center col  manageProducts">
                         <div className="manageProducts-img ">
-                            <Image className="" src={product.product_img} alt="resim" />
+                            <Image className="" src={product.product_img} alt="resim" width={250} height={250} />
                         </div>
                         <div >
                             <span className="manageProductsSpan-one">{product.description.toLowerCase()}</span>

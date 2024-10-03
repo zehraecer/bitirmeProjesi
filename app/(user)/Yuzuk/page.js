@@ -22,7 +22,7 @@ export default function Yuzuk() {
             {rings.map(product => (
                 <div key={product.id} className="col user-products-col ">
                     <Link className="user-products-link w-100 zoom-img" href={`/${product.id}`}>
-                        <Image src={product.product_img} alt="resim" />
+                        <Image src={product.product_img} alt="resim" width={250} height={250} />
                     </Link>
                     <div className="user-product-one w-100">
                         {Products_category.map((pCategory, index) => {
