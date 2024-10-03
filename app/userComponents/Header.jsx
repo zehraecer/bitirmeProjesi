@@ -71,7 +71,7 @@ export const Header = () => {
             }
         }
         zehra()
-    }, [])
+    }, [basketProduct])
 
     const DeleteProduct = (id) => {
         DeleteBtn(id)

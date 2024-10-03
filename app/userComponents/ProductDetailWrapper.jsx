@@ -32,7 +32,7 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
             }
         };
         AddToCart()
-    }, [basketBtn, Products_basket])
+    }, [basketBtn, Products_basket, clickedProduct])
 
     useEffect(() => {
 

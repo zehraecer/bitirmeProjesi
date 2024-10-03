@@ -21,7 +21,7 @@ export const Basket = () => {
             }
         }
         zehra()
-    }, [])
+    }, [basketProduct])
 
     const DeleteProduct = (id) => {
         DeleteBtn(id)

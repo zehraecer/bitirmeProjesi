@@ -21,7 +21,7 @@ export const BasketPageComponent = () => {
             }
         }
         zehra()
-    }, [])
+    }, [basketProduct])
 
     const DeleteProduct = (id) => {
         DeleteBtn(id)
