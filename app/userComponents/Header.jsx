@@ -107,7 +107,7 @@ export const Header = () => {
                 </div>
                 <div className='d-flex gap-3'>
                     <span>{userLogo}</span>
-                    <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><Image src="basket.svg" /></button>
+                    <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><Image src="basket.svg" alt="resim" /></button>
 
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                         <div className="offcanvas-header">
@@ -120,13 +120,13 @@ export const Header = () => {
                                     <div key={index} className="d-flex flex-column basketOffcanvas">
                                         <div className='d-flex justify-content-between align-items-start gap-2 mt-2 basketOffcanvas-div' >
                                             <div className='d-flex gap-2'>
-                                                <Image style={{ width: "50px", height: "50px" }} src={products.img} alt="" />
+                                                <Image style={{ width: "50px", height: "50px" }} src={products.img} alt="resim" />
                                                 <div className='d-flex flex-column basketMiddle'>
                                                     <span> {products.title}</span>
                                                     <p>{products.price}₺</p>
                                                 </div>
                                             </div>
-                                            <span onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' /></span>
+                                            <span onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' alt="resim" /></span>
                                         </div>
                                     </div>
 

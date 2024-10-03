@@ -35,7 +35,7 @@ export const BasketPageComponent = () => {
                     {basketProduct.map((products, index) => (
                         <div key={index} className="d-flex flex-column">
                             <div >
-                                <Image style={{ width: "100px", height: "150px" }} src={products.img} alt="" />
+                                <Image style={{ width: "100px", height: "150px" }} src={products.img} alt="resim" />
                                 <span>{products.id}---- {products.title} - {products.stock}</span>
                                 <button style={{ padding: "8px", backgroundColor: "pink" }} onClick={() => DeleteProduct(products.id)}>sil</button>
                             </div>

@@ -22,7 +22,7 @@ export default function Kupe() {
             {earrings.map(product => (
                 <div key={product.id} className="col user-products-col ">
                     <Link className="user-products-link w-100 zoom-img" href={`/${product.id}`}>
-                        <Image src={product.product_img} />
+                        <Image src={product.product_img} alt="resim" />
                     </Link>
                     <div className="user-product-one w-100">
                         {Products_category.map((pCategory, index) => {
