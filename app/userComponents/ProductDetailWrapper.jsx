@@ -9,8 +9,6 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
     const { Products_basket, Products_category, Products_Color } = useMyContext()
     // const [basket, setBasket] = useState(Products_basket)
     const [basketBtn, setBasketBtn] = useState(false)
-    const localPiece = localStorage.getItem('piece') || 0;
-    const [piece, setPiece] = useState(localPiece)
     // let y = true
     useEffect(() => {
         const AddToCart = async () => {
@@ -21,8 +19,6 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                     if (isProductTheCart.length < 1) {
                         const name = session.user.user_metadata.name
                         const eposta = session.user.email
-                        const piece = localStorage.getItem('piece') || 0;
-                        localStorage.setItem('piece', piece);
                         AddToCartFunction(clickedProduct, name, eposta)
                     } else {
                         console.log("ssepette ürün var");
@@ -41,19 +37,17 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
 
     }, [clickedProduct, clickedProduct.description])
 
-    const IncreaseProduct = () => {
-        setPiece(piece => piece + 1)
-    }
+    // const IncreaseProduct = () => {
+    //     setPiece(piece => piece + 1)
+    // }
 
-    const ReduceProduct = () => {
-        if (piece > 0) {
-            setPiece(piece => piece - 1)
-        }
-    }
+    // const ReduceProduct = () => {
+    //     if (piece > 0) {
+    //         setPiece(piece => piece - 1)
+    //     }
+    // }
 
-    useEffect(() => {
 
-    }, [piece])
 
 
     return (

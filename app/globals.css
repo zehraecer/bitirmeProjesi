@@ -35,6 +35,16 @@ li {
   gap: 20px;
 }
 
+
+
+/* header */
+.headerDiv {
+  a {
+    text-decoration: none !important;
+    color: #1D2026;
+  }
+}
+
 .user-products-col {
   padding: 15px 10px;
   border-radius: 10px;
@@ -443,4 +453,27 @@ input[type="file"]::file-selector-button:active {
   font-weight: 700;
   color: #171717;
   text-transform: capitalize;
+}
+
+/* basketOffcanvas */
+
+
+.basketOffcanvas-div {
+  padding: 10px 10px 0px 10px;
+  background-color: rgb(248, 235, 223);
+  border-radius: 7px;
+
+  span {
+
+    font-size: 17px;
+    font-weight: 500;
+    color: #f35656;
+  }
+
+  p {
+    font-size: 17px;
+    font-weight: 700;
+    color: red;
+  }
+
 }

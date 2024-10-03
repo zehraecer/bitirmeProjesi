@@ -29,11 +29,12 @@ export const BasketPageComponent = () => {
     return (
         <>
             <>
-                <div style={{ padding: "10px", backgroundColor: "lightgreen" }}>
+                <div style={{ padding: "10px" }}>
                     <span>sepet</span>
                     {basketProduct.map((products, index) => (
                         <div key={index} className="d-flex flex-column">
-                            <div>
+                            <div >
+                                <img style={{ width: "100px", height: "150px" }} src={products.img} alt="" />
                                 <span>{products.id}---- {products.title} - {products.stock}</span>
                                 <button style={{ padding: "8px", backgroundColor: "pink" }} onClick={() => DeleteProduct(products.id)}>sil</button>
                             </div>

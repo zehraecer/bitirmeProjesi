@@ -35,8 +35,9 @@ export const LogOutUser = async (one, two) => {
 
 export const AddToCartFunction = async (product, name, eposta) => {
 
-    const piece = localStorage.getItem('piece') || 0;
-
+    const originalPrice = product.price;
+    const discountPercentage = product.discount_rate;
+    const discountAmount = originalPrice * (discountPercentage / 100);
     try {
         const response = await fetch('/api/addToCart', {
             method: 'POST',
@@ -45,10 +46,10 @@ export const AddToCartFunction = async (product, name, eposta) => {
                 user_name: name,
                 user_eposta: eposta,
                 title: product.description,
-                price: product.price * piece,
-                previous_price: product.price,
+                price: (originalPrice - discountAmount).toFixed(2),
                 img: product.product_img,
-                stock: (piece) + 1
+                stock: 1,
+                discount: product.discount_rate
             })
         });
 
