@@ -2,6 +2,7 @@
 import { useEffect } from "react"
 import { useMyContext } from "../context"
 import Link from "next/link"
+import Image from "next/image"
 
 export const ProductList = () => {
     const { Products, Products_category, Products_Color } = useMyContext()
@@ -15,7 +16,7 @@ export const ProductList = () => {
                 {Products.map(product => (
                     <div key={product.id} className="col user-products-col ">
                         <Link className="user-products-link w-100 zoom-img" href={`/${product.id}`}>
-                            <img src={product.product_img} />
+                            <Image src={product.product_img} />
                         </Link>
                         <div className="user-product-one w-100">
                             {Products_category.map((pCategory, index) => {

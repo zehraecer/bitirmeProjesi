@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { AddToCartFunction, CheckSessionData, ProductBasket } from './checkSessionData';
 import { useMyContext } from "../context";
+import Image from 'next/image';
 // import { AddProduct } from '../adminComponents/zehra';
 
 
@@ -52,20 +53,9 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
 
     return (
         <>
-            {/* <span>{clickedProduct.description}</span>
-            <img style={{ width: "100px", height: "100px" }} src={clickedProduct.product_img} />
-            <span>{clickedProduct.price}₺</span>
-            <span>
-                <span style={{ padding: "15px", backgroundColor: 'lightcoral', cursor: "pointer" }} onClick={ReduceProduct}>-</span>
-                <span style={{ padding: "15px", backgroundColor: 'lightblue' }}>{piece}</span>
-                <span style={{ padding: "15px", backgroundColor: 'lightcoral', cursor: "pointer" }} onClick={IncreaseProduct}>+</span>
-            </span>
-            <button className="btn" onClick={() => setahsen(true)} >Sepete ekle</button> */}
-
             <div className='d-flex  flex-md-row flex-column justify-content-center align-items-start  product-detail '>
-
                 <div className='p-detail-left zoom-effect'>
-                    <img src={clickedProduct.product_img} alt="" />
+                    <Image src={clickedProduct.product_img} alt="" />
                 </div>
 
                 <div className='p-detail-right '>

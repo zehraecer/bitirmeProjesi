@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { useMyContext } from "../context"
 import { CheckSessionData, DeleteBtn } from "./checkSessionData"
+import Image from "next/image"
 export const BasketPageComponent = () => {
     const { Products_basket } = useMyContext()
     const [basketProduct, setBasketProduct] = useState(Products_basket)
@@ -34,7 +35,7 @@ export const BasketPageComponent = () => {
                     {basketProduct.map((products, index) => (
                         <div key={index} className="d-flex flex-column">
                             <div >
-                                <img style={{ width: "100px", height: "150px" }} src={products.img} alt="" />
+                                <Image style={{ width: "100px", height: "150px" }} src={products.img} alt="" />
                                 <span>{products.id}---- {products.title} - {products.stock}</span>
                                 <button style={{ padding: "8px", backgroundColor: "pink" }} onClick={() => DeleteProduct(products.id)}>sil</button>
                             </div>

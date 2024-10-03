@@ -1,5 +1,6 @@
 "use client"
 import { useMyContext } from "@/app/context";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -15,13 +16,13 @@ export default function Kupe() {
             setEarrings(kupeler)
         }
 
-    }, [])
+    }, [Products, Products_category])
     return (
         <div className="row mt-5 user-products">
             {earrings.map(product => (
                 <div key={product.id} className="col user-products-col ">
                     <Link className="user-products-link w-100 zoom-img" href={`/${product.id}`}>
-                        <img src={product.product_img} />
+                        <Image src={product.product_img} />
                     </Link>
                     <div className="user-product-one w-100">
                         {Products_category.map((pCategory, index) => {

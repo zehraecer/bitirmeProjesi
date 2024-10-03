@@ -6,6 +6,7 @@ import { CheckSessionData, DeleteBtn, LogOutUser } from "./checkSessionData";
 import { useMyContext } from "../context";
 import { Basket } from "./Basket";
 import { StockChange } from '@/actions/StockAction';
+import Image from 'next/image';
 
 
 export const Header = () => {
@@ -106,7 +107,7 @@ export const Header = () => {
                 </div>
                 <div className='d-flex gap-3'>
                     <span>{userLogo}</span>
-                    <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><img src="basket.svg" /></button>
+                    <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><Image src="basket.svg" /></button>
 
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                         <div className="offcanvas-header">
@@ -119,13 +120,13 @@ export const Header = () => {
                                     <div key={index} className="d-flex flex-column basketOffcanvas">
                                         <div className='d-flex justify-content-between align-items-start gap-2 mt-2 basketOffcanvas-div' >
                                             <div className='d-flex gap-2'>
-                                                <img style={{ width: "50px", height: "50px" }} src={products.img} alt="" />
+                                                <Image style={{ width: "50px", height: "50px" }} src={products.img} alt="" />
                                                 <div className='d-flex flex-column basketMiddle'>
                                                     <span> {products.title}</span>
                                                     <p>{products.price}₺</p>
                                                 </div>
                                             </div>
-                                            <span onClick={() => DeleteProduct(products.id)}> <img src='bin.svg' /></span>
+                                            <span onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' /></span>
                                         </div>
                                     </div>
 
