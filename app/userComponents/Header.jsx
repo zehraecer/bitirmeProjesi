@@ -33,9 +33,6 @@ export const Header = () => {
         };
         checkSession();
     }, []);
-    useEffect(() => {
-
-    }, [deneme])
 
     useEffect(() => {
         if (registedUser && registedUser.length > 0) {
@@ -71,7 +68,7 @@ export const Header = () => {
             }
         }
         zehra()
-    }, [basketProduct])
+    }, [])
 
     const DeleteProduct = (id) => {
         DeleteBtn(id)
@@ -109,7 +106,7 @@ export const Header = () => {
                     <span>{userLogo}</span>
                     <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><Image src="basket.svg" alt="resim" width={25} height={25} /></button>
 
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title" id="offcanvasRightLabel" >Sepetinizdeki Ürünler</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -144,7 +141,7 @@ export const Header = () => {
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                             <div className="offcanvas-header">
                                 <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -161,7 +158,7 @@ export const Header = () => {
                                         <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Dropdown
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul className="dropdown-menu">
                                             <li><a className="dropdown-item" href="#">Action</a></li>
                                             <li><a className="dropdown-item" href="#">Another action</a></li>
                                             <li>
