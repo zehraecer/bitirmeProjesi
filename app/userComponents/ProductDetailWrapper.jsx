@@ -37,12 +37,26 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
 
     return (
         <>
-            <div className='d-flex  flex-md-row flex-column justify-content-center align-items-start  product-detail '>
-                <div className='p-detail-left zoom-effect'>
-                    <Image src={clickedProduct.product_img} alt="resim" width={500} height={430} />
+            <div className='d-flex flex-md-row flex-column justify-content-center align-items-center align-items-md-center product-detail pt-4'>
+                <div className=' p-detail-left zoom-effect'>
+                    <Image
+                        className="d-none d-sm-block"
+                        src={clickedProduct.product_img}
+                        alt="resim"
+                        width={500}
+                        height={430}
+                    />
+
+                    <Image
+                        className="d-sm-none"
+                        src={clickedProduct.product_img}
+                        alt="resim"
+                        width={250}
+                        height={150}
+                    />
                 </div>
 
-                <div className='p-detail-right '>
+                <div className=' p-detail-right '>
                     <div className='p-detail-one w-100'>
                         <span>{clickedProduct.description}</span>
                         {Products_Color.map((color, index) => {
@@ -52,8 +66,6 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                             }
                         })}
                     </div>
-
-
                     <div className='d-flex gap-10 p-detail-two '>
                         <div className='p-detail-two-span'>
                             <span>₺{clickedProduct.price}</span>

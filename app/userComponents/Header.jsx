@@ -164,7 +164,7 @@ export const Header = () => {
                 </div>
             </div>
 
-            <div className='d-block d-lg-none'>
+            <div className='d-block d-lg-none '>
                 <nav className="navbar bg-body-tertiary fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">Parla</a>

@@ -206,11 +206,10 @@ li {
 .p-detail-left {
 
   border-radius: 15px !important;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   img {
-    height: 500px;
-    width: 430px;
+
     object-fit: cover;
   }
 }
