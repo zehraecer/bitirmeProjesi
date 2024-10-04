@@ -12,18 +12,12 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
     useEffect(() => {
         const AddToCart = async () => {
             if (basketBtn) {
-                console.log("fdbndf");
                 const session = await CheckSessionData();
-                const isProductTheCart = Products_basket.filter(basket => basket.title === clickedProduct.description);
-                console.log(isProductTheCart);
                 const eposta = session.user.email;
-                const asa = Products_basket.filter(pro => pro.user_eposta === eposta)
-                console.log(asa);
-                const a = asa.filter(a => a.title == clickedProduct.description)
-                console.log(typeof a);
-
+                const isTherUser = Products_basket.filter(pro => pro.user_eposta === eposta)
+                const isThereProduct = isTherUser.filter(product => product.title == clickedProduct.description)
                 if (session) {
-                    if (a.length < 1) {
+                    if (isThereProduct.length < 1) {
                         const name = session.user.user_metadata.name;
                         const eposta = session.user.email;
                         await AddToCartFunction(clickedProduct, name, eposta);
