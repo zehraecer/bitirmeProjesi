@@ -59,6 +59,10 @@ a {
   box-shadow: rgba(222, 123, 73, 0.17) 0px 0px 25px 4px inset, rgba(251, 148, 97, 0.15) 0px -36px 30px 0px inset, rgba(241, 128, 91, 0.1) 0px -79px 40px 0px inset, rgba(228, 106, 65, 0.06) 0px 2px 1px, rgb(238 103 50 / 9%) 0px 4px 2px, rgb(211 73 8 / 9%) 0px 8px 4px, rgb(210 62 40 / 9%) 0px 16px 8px, rgb(215 77 38 / 9%) 0px 32px 16px;
 }
 
+.logOut-span {
+  cursor: pointer !important;
+}
+
 .user-product-one {
   display: flex;
   gap: 10px;

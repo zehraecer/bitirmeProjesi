@@ -32,3 +32,26 @@ export async function MyProvider({ children }) {
         </Provider>
     );
 }
+
+
+// const [Products, setProducts] = useState()
+// const [basket, setBasket] = useState()
+// const [category, setCategory] = useState()
+// const [color, setColor] = useState()
+
+
+// useEffect(() => {
+
+//     const urun = async () => {
+//         const urunler = await GetProducts()
+//         setProducts(urunler)
+//         const bskt = await GetBasket()
+//         setBasket(bskt)
+//         const kategori = await GetCategory()
+//         setCategory(kategori)
+//         const renk = await GetColor()
+//         setColor(renk)
+//     }
+//     urun()
+// }, [])
+

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { CheckSessionData, DeleteBtn, LogOutUser } from "./checkSessionData";
 import { useMyContext } from "../context";
 import Image from 'next/image';
+import { GetProducts } from './getTables';
 
 
 export const Header = () => {
@@ -16,8 +17,9 @@ export const Header = () => {
     const [registedUser, setRegistedUser] = useState(null)
     // const [userLogOut, setUserLogOut] = useState(false)
     const [adminEmail, setAdminEmail] = useState(null)
-    const [deneme, setdeneme] = useState(Products_basket)
+
     const [userLogo, setUserLogo] = useState("")
+
 
     useEffect(() => {
         const checkSession = async () => {
@@ -124,7 +126,7 @@ export const Header = () => {
                         :
                         <div>
                             <span>hoşgeldiniz {registedUser}
-                                <span onClick={HandleLogOut}> <Image className="ms-3" src="logout.svg" width={20} height={20} alt="resim" /> </span>
+                                <span className="logOut-span" onClick={HandleLogOut}> <Image className="ms-3" src="logout.svg" width={20} height={20} alt="resim" /> </span>
                             </span>
                         </div>
                     }
@@ -181,7 +183,7 @@ export const Header = () => {
                                     :
                                     <div>
                                         <span>hoşgeldiniz {registedUser}
-                                            <span onClick={HandleLogOut}> <Image className="ms-3" src="logout.svg" width={20} height={20} alt="resim" /> </span>
+                                            <span className="logOut-span" onClick={HandleLogOut}> <Image className="ms-3 " src="logout.svg" width={20} height={20} alt="resim" /> </span>
                                         </span>
                                     </div>
                                 }
