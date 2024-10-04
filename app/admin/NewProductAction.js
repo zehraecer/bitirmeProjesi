@@ -14,7 +14,7 @@ export async function NewProductForm(formData) {
 
     const sessionEposta = sessionUser.session.user.email
     try {
-        const photoResponse = await fetch('http://localhost:3000/api/getPhoto', {
+        const photoResponse = await fetch('https://bitirme-projesi-sage.vercel.app/api/getPhoto', {
             method: 'POST',
             body: formData,
         });
@@ -33,7 +33,7 @@ export async function NewProductForm(formData) {
 
         if (sessionEposta) {
             if (sessionEposta === "zehra@gmail.com") {
-                const response = await fetch('http://localhost:3000/api/adminAddProduct', {
+                const response = await fetch('https://bitirme-projesi-sage.vercel.app/api/adminAddProduct', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
