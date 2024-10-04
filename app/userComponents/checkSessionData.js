@@ -33,7 +33,7 @@ export const LogOutUser = async (one, two) => {
     }
 }
 
-export const AddToCartFunction = async (product, name, eposta, stock) => {
+export const AddToCartFunction = async (product, name, eposta) => {
 
     const originalPrice = product.price;
     const discountPercentage = product.discount_rate;
@@ -48,7 +48,7 @@ export const AddToCartFunction = async (product, name, eposta, stock) => {
                 title: product.description,
                 price: (originalPrice - discountAmount).toFixed(2),
                 img: product.product_img,
-                stock: stock,
+                stock: 1,
                 discount: product.discount_rate
             })
         });
