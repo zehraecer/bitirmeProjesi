@@ -46,6 +46,23 @@ export const Header = () => {
         setUserLogo("");
     }
 
+    // useEffect(() => {
+    //     const notUser = async () => {
+
+    //         const session = await CheckSessionData()
+    //         if (session) {
+    //             const sessionMail = session.user.email
+    //             if (sessionMail === "zehra@gmail.com") {
+    //                 setIsLogin(!isLogin)
+    //                 await LogOutUser(setIsLogin, isLogin)
+    //                 setRegistedUser(null);
+    //                 setUserLogo("");
+    //             }
+    //         }
+    //     }
+    //     notUser()
+    // }, [isLogin, registedUser])
+
     useEffect(() => {
 
     }, [isLogin])
@@ -65,6 +82,8 @@ export const Header = () => {
                 setBasketProduct([])
                 console.log("sepet boş");
             }
+
+
         }
         zehra()
     }, [])

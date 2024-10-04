@@ -9,6 +9,7 @@ import Image from 'next/image';
 export const ProductDetailWrapper = ({ clickedProduct }) => {
     const { Products_basket, Products_Color } = useMyContext()
     const [basketBtn, setBasketBtn] = useState(false)
+
     useEffect(() => {
         const AddToCart = async () => {
             if (basketBtn) {
@@ -23,6 +24,7 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                         await AddToCartFunction(clickedProduct, name, eposta);
                     } else {
                         console.log("ssepette ürün var");
+
                     }
                 } else {
                     console.log("lütfen giriş yap");
@@ -50,6 +52,8 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
                             }
                         })}
                     </div>
+
+
                     <div className='d-flex gap-10 p-detail-two '>
                         <div className='p-detail-two-span'>
                             <span>₺{clickedProduct.price}</span>
