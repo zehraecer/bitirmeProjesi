@@ -173,6 +173,18 @@ export const Header = () => {
                                 {userLogo ? <div className="userLogo">
                                     <span >{userLogo}</span>
                                 </div> : ""}
+                                {!isLogin ?
+                                    <div className="d-flex gap-2 ">
+                                        <Link className="logIn" href="LogIn"> Giriş Yap</Link>
+                                        <Link className="signUp" href="SignUp">Kayıt ol</Link>
+                                    </div>
+                                    :
+                                    <div>
+                                        <span>hoşgeldiniz {registedUser}
+                                            <span onClick={HandleLogOut}> <Image className="ms-3" src="logout.svg" width={20} height={20} alt="resim" /> </span>
+                                        </span>
+                                    </div>
+                                }
                                 <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"><Image src="basket.svg" alt="resim" width={25} height={25} /></button>
 
                                 {/* Sepet Offcanvas */}
@@ -197,7 +209,9 @@ export const Header = () => {
                                                     </div>
                                                 </div>
 
-                                            )) : <div>sepet boş</div>}
+                                            )) : <div>sepet boş
+
+                                            </div>}
 
                                         </div>
                                     </div>
@@ -229,6 +243,8 @@ export const Header = () => {
                                     <li className="nav-item">
                                         <Link aria-current="page" className="nav-link" href="/Yuzuk">Yüzük</Link>
                                     </li>
+
+
                                 </ul>
                             </div>
                         </div>
