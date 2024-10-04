@@ -9,9 +9,6 @@ export const NewProduct = ({ Products }) => {
     useEffect(() => {
         NewProductForm()
     }, [Products])
-    console.log(Products);
-
-
     return (
         <>
             <form action={NewProductForm} className="newProductFormWrapper" >
