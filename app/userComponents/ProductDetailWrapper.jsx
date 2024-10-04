@@ -7,49 +7,37 @@ import Image from 'next/image';
 
 
 export const ProductDetailWrapper = ({ clickedProduct }) => {
-    const { Products_basket, Products_category, Products_Color } = useMyContext()
-    // const [basket, setBasket] = useState(Products_basket)
+    const { Products_basket, Products_Color } = useMyContext()
     const [basketBtn, setBasketBtn] = useState(false)
-    // let y = true
     useEffect(() => {
         const AddToCart = async () => {
             if (basketBtn) {
-                const isProductTheCart = Products_basket.filter(basket => basket.title === clickedProduct.description)
-                const session = await CheckSessionData()
+                console.log("fdbndf");
+                const session = await CheckSessionData();
+                const isProductTheCart = Products_basket.filter(basket => basket.title === clickedProduct.description);
+                console.log(isProductTheCart);
+                const eposta = session.user.email;
+                const asa = Products_basket.filter(pro => pro.user_eposta === eposta)
+                console.log(asa);
+                const a = asa.filter(a => a.title == clickedProduct.description)
+                console.log(typeof a);
+
                 if (session) {
-                    if (isProductTheCart.length < 1) {
-                        const name = session.user.user_metadata.name
-                        const eposta = session.user.email
-                        AddToCartFunction(clickedProduct, name, eposta)
+                    if (a.length < 1) {
+                        const name = session.user.user_metadata.name;
+                        const eposta = session.user.email;
+                        await AddToCartFunction(clickedProduct, name, eposta);
                     } else {
                         console.log("ssepette ürün var");
                     }
                 } else {
                     console.log("lütfen giriş yap");
                 }
-            } else {
-                setBasketBtn(!basketBtn)
+                setBasketBtn(false);
             }
         };
-        AddToCart()
-    }, [basketBtn, Products_basket, clickedProduct])
-
-    useEffect(() => {
-
-    }, [clickedProduct, clickedProduct.description])
-
-    // const IncreaseProduct = () => {
-    //     setPiece(piece => piece + 1)
-    // }
-
-    // const ReduceProduct = () => {
-    //     if (piece > 0) {
-    //         setPiece(piece => piece - 1)
-    //     }
-    // }
-
-
-
+        AddToCart();
+    }, [basketBtn, Products_basket, clickedProduct]);
 
     return (
         <>
