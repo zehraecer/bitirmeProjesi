@@ -4,8 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CheckSessionData, DeleteBtn, LogOutUser } from "./checkSessionData";
 import { useMyContext } from "../context";
-import { Basket } from "./Basket";
-import { StockChange } from '@/actions/StockAction';
 import Image from 'next/image';
 
 
@@ -20,7 +18,6 @@ export const Header = () => {
     const [adminEmail, setAdminEmail] = useState(null)
     const [deneme, setdeneme] = useState(Products_basket)
     const [userLogo, setUserLogo] = useState("")
-    const [newStock, setNewStock] = useState("")
 
     useEffect(() => {
         const checkSession = async () => {
@@ -45,6 +42,8 @@ export const Header = () => {
     const HandleLogOut = async () => {
         setIsLogin(!isLogin)
         await LogOutUser(setIsLogin, isLogin)
+        setRegistedUser(null);
+        setUserLogo("");
     }
 
     useEffect(() => {
@@ -70,17 +69,26 @@ export const Header = () => {
         zehra()
     }, [])
 
-    const DeleteProduct = (id) => {
-        DeleteBtn(id)
-    }
+    const DeleteProduct = async (id) => {
+        try {
+            const response = await DeleteBtn(id);
+            if (response) {
+                setBasketProduct((products) => products.filter(product => product.id !== id));
+            }
+        } catch (error) {
+            console.error("Silme işlemi başarısız:", error);
+        }
+    };
 
+    useEffect(() => {
 
+    }, [basketProduct])
     return (
         <div>
-            <div className='d-flex justify-content-between align-items-center mt-2 headerDiv'>
+            <div className='d-flex justify-content-between align-items-center mt-2 headerDiv d-none d-lg-flex'>
                 <div className='d-flex justify-content-between align-items-center' >
                     <h1>Parla</h1>
-                    <ul className='d-flex gap-3'>
+                    <ul className='d-flex gap-3 mb-0'>
                         <Link href="/">Tüm Ürünler</Link>
                         <Link href="/Kolye">Kolye</Link>
                         <Link href="/Bileklik">Bileklik</Link>
@@ -90,20 +98,22 @@ export const Header = () => {
                 </div>
                 <div className='d-flex justify-content-between align-items-center'>
                     {!isLogin ?
-                        <div>
-                            <Link href="LogIn"> Giriş Yap</Link>
-                            <Link href="SignUp">Kayıt ol</Link>
+                        <div className="d-flex gap-2">
+                            <Link className="logIn" href="LogIn"> Giriş Yap</Link>
+                            <Link className="signUp" href="SignUp">Kayıt ol</Link>
                         </div>
                         :
                         <div>
                             <span>hoşgeldiniz {registedUser}
-                                <span onClick={HandleLogOut}>çıkış yap</span>
+                                <span onClick={HandleLogOut}> <Image className="ms-3" src="logout.svg" width={20} height={20} alt="resim" /> </span>
                             </span>
                         </div>
                     }
                 </div>
-                <div className='d-flex gap-3'>
-                    <span>{userLogo}</span>
+                <div className='d-flex align-items-center gap-3'>
+                    {userLogo ? <div className="userLogo">
+                        <span >{userLogo}</span>
+                    </div> : ""}
                     <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><Image src="basket.svg" alt="resim" width={25} height={25} /></button>
 
                     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -113,7 +123,7 @@ export const Header = () => {
                         </div>
                         <div className="offcanvas-body">
                             <div style={{ padding: "10px" }}>
-                                {basketProduct.map((products, index) => (
+                                {basketProduct.length > 0 ? basketProduct.map((products, index) => (
                                     <div key={index} className="d-flex flex-column basketOffcanvas">
                                         <div className='d-flex justify-content-between align-items-start gap-2 mt-2 basketOffcanvas-div' >
                                             <div className='d-flex gap-2'>
@@ -123,11 +133,12 @@ export const Header = () => {
                                                     <p>{products.price}₺</p>
                                                 </div>
                                             </div>
-                                            <span onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' alt="resim" width={25} height={25} /></span>
+                                            <span className="bin" onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' alt="resim" width={25} height={25} /></span>
                                         </div>
                                     </div>
 
-                                ))}
+                                )) : <div>sepet boş</div>}
+
                             </div>
                         </div>
                     </div>
@@ -138,45 +149,74 @@ export const Header = () => {
                 <nav className="navbar bg-body-tertiary fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">Parla</a>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                        <div className="d-flex">
+                            <div className='d-flex  align-items-center gap-3'>
+                                {userLogo ? <div className="userLogo">
+                                    <span >{userLogo}</span>
+                                </div> : ""}
+                                <button className="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"><Image src="basket.svg" alt="resim" width={25} height={25} /></button>
+
+                                {/* Sepet Offcanvas */}
+                                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasBasket" aria-labelledby="offcanvasBasketLabel">
+                                    <div className="offcanvas-header">
+                                        <h5 className="offcanvas-title" id="offcanvasBasketLabel" >Sepetinizdeki Ürünler</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div className="offcanvas-body">
+                                        <div style={{ padding: "10px" }}>
+                                            {basketProduct.length > 0 ? basketProduct.map((products, index) => (
+                                                <div key={index} className="d-flex flex-column basketOffcanvas">
+                                                    <div className='d-flex justify-content-between align-items-start gap-2 mt-2 basketOffcanvas-div' >
+                                                        <div className='d-flex gap-2'>
+                                                            <Image width={50} height={50} src={products.img} alt="resim" />
+                                                            <div className='d-flex flex-column basketMiddle'>
+                                                                <span> {products.title}</span>
+                                                                <p>{products.price}₺</p>
+                                                            </div>
+                                                        </div>
+                                                        <span className="bin" onClick={() => DeleteProduct(products.id)}> <Image src='bin.svg' alt="resim" width={25} height={25} /></span>
+                                                    </div>
+                                                </div>
+
+                                            )) : <div>sepet boş</div>}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Hamburger Menü Offcanvas */}
+                            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+
                         <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                             <div className="offcanvas-header">
-                                <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                                <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menü</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li className="nav-item">
-                                        <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                        <Link aria-current="page" className="nav-link" href="/Kolye">Kolye</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Link</a>
+                                        <Link className="nav-link" aria-current="page" href="/Bileklik">Bileklik</Link>
                                     </li>
-                                    <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Dropdown
-                                        </a>
-                                        <ul className="dropdown-menu">
-                                            <li><a className="dropdown-item" href="#">Action</a></li>
-                                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                                            <li>
-                                                <hr className="dropdown-divider" />
-                                            </li>
-                                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                        </ul>
+                                    <li className="nav-item">
+                                        <Link aria-current="page" className="nav-link" href="/Kupe">Küpe</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link aria-current="page" className="nav-link" href="/Yuzuk">Yüzük</Link>
                                     </li>
                                 </ul>
-                                <form className="d-flex mt-3" role="search">
-                                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div>
+
 
         </div >
     );

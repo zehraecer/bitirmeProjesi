@@ -56,14 +56,13 @@ export const AddToCartFunction = async (product, name, eposta) => {
         if (!response.ok) {
             throw new Error('hata');
         }
-
         const data = await response.json();
-
+        return true;
     } catch (error) {
         console.log(error);
+        return false
     }
 }
-
 
 export const DeleteBtn = async (id) => {
     try {
@@ -79,22 +78,11 @@ export const DeleteBtn = async (id) => {
 
         const data = await response.json();
         console.log('Ürün başarıyla silindi:', data);
+        return true;
     } catch (error) {
         console.error('Silme işlemi başarısız:', error);
+        return false;
     }
 };
 
 
-
-// export const ProductBasket = async () => {
-//     const supabase = createClient()
-
-//     let { data: Products_basket, error } = await supabase
-//         .from('Products_basket')
-//         .select('*')
-
-//     if (error) {
-//         console.log(error);
-//     }
-//     return Products_basket
-// }

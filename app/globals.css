@@ -28,14 +28,18 @@ li {
 }
 
 .padding-i {
-  padding-inline: 100px;
+  padding-inline: 150px;
 }
 
 .user-products {
   gap: 20px;
 }
 
+.bakalim {
 
+  padding-bottom: 30px;
+  border-bottom: 2px solid #edbb9f;
+}
 
 /* header */
 .headerDiv {
@@ -76,6 +80,37 @@ li {
   }
 }
 
+
+.userLogo {
+
+  padding: 7px 13px;
+  background-color: #f9f3ef;
+  border-radius: 50%;
+  color: #eb6c27;
+  border: 2px solid #eb6c27;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+
+.logIn {
+
+  padding: 10px 20px;
+  background-color: #eb6c27;
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+.signUp {
+
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #eb6c27 !important;
+  border: 1px solid #eb6c27;
+  border-radius: 5px;
+
+}
 
 .user-product-two {
   display: flex;
@@ -476,4 +511,8 @@ input[type="file"]::file-selector-button:active {
     color: red;
   }
 
+}
+
+.bin {
+  cursor: pointer;
 }

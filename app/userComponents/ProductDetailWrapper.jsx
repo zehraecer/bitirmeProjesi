@@ -37,7 +37,7 @@ export const ProductDetailWrapper = ({ clickedProduct }) => {
         <>
             <div className='d-flex  flex-md-row flex-column justify-content-center align-items-start  product-detail '>
                 <div className='p-detail-left zoom-effect'>
-                    <Image src={clickedProduct.product_img} alt="resim" width={50} height={50} />
+                    <Image src={clickedProduct.product_img} alt="resim" width={500} height={430} />
                 </div>
 
                 <div className='p-detail-right '>
