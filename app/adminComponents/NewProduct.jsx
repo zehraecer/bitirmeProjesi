@@ -9,6 +9,8 @@ export const NewProduct = ({ Products }) => {
     useEffect(() => {
         NewProductForm()
     }, [Products])
+    console.log(Products);
+
 
     return (
         <>
