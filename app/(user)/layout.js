@@ -1,7 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Header } from "../userComponents/Header";
+import { Footer } from '../userComponents/Footer';
 
 export default function UserLayout({ children }) {
+
     return (
         <main>
             <div className="d-flex flex-column w-100 ">
@@ -12,6 +14,8 @@ export default function UserLayout({ children }) {
                 <main className="padding-i">
                     {children}
                 </main>
+
+                <Footer />
             </div>
         </main>
     )

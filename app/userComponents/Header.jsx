@@ -5,11 +5,8 @@ import { useEffect, useState } from "react";
 import { CheckSessionData, DeleteBtn, LogOutUser } from "./checkSessionData";
 import { useMyContext } from "../context";
 import Image from 'next/image';
-import { GetProducts } from './getTables';
-
 
 export const Header = () => {
-
 
     const { Products_basket } = useMyContext()
     const [basketProduct, setBasketProduct] = useState(Products_basket)
@@ -166,7 +163,7 @@ export const Header = () => {
                 </div>
             </div>
 
-            <div className='d-block d-lg-none '>
+            <div className='d-block d-lg-none mb-4  pb-4'>
                 <nav className="navbar bg-body-tertiary fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">Parla</a>
